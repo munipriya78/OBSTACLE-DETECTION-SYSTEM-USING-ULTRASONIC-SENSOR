@@ -53,13 +53,64 @@ Step 7: Save Your Work
 
 
 ## Code:
+```
+// C++ code
+//
+int Sonic = 0;
 
+long readUltrasonicDistance(int triggerPin, int echoPin)
+{
+  pinMode(triggerPin, OUTPUT);  // Clear the trigger
+  digitalWrite(triggerPin, LOW);
+  delayMicroseconds(2);
+  // Sets the trigger pin to HIGH state for 10 microseconds
+  digitalWrite(triggerPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(triggerPin, LOW);
+  pinMode(echoPin, INPUT);
+  // Reads the echo pin, and returns the sound wave travel time in microseconds
+  return pulseIn(echoPin, HIGH);
+}
 
+void setup()
+{
+  pinMode(11, OUTPUT);
+  pinMode(9, OUTPUT);
+  pinMode(10, OUTPUT);
+}
+
+void loop()
+{
+  Sonic = 0.01723 * readUltrasonicDistance(5, 6);
+  if (Sonic < 50) {
+    analogWrite(11, 255);
+    analogWrite(9, 0);
+    analogWrite(10, 0);
+  }
+  if (Sonic > 100) {
+    analogWrite(11, 51);
+    analogWrite(9, 204);
+    analogWrite(10, 0);
+  }
+  if (Sonic > 50 && Sonic < 100) {
+    analogWrite(11, 255);
+    analogWrite(9, 102);
+    analogWrite(10, 0);
+  }
+  delay(10); // Delay a little bit to improve simulation performance
+}
+```
 ## Output:
  
+<img width="1315" height="683" alt="image" src="https://github.com/user-attachments/assets/ed7279bd-7b63-4344-8312-de6ae2ac290b" />
 
 
 ## Result
+
+
+
+https://github.com/user-attachments/assets/20b5f57a-bf36-4adb-818c-027d0f2c0407
+
 
 
 Result:
